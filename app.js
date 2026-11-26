@@ -173,7 +173,7 @@ function updateUI() {
     leverBtn.disabled = isFull;
     const span = leverBtn.querySelector('span');
     if (span) {
-      span.textContent = isFull ? 'Cone full' : state.isPouring ? 'Swirling…' : 'Segure para servir';
+      span.textContent = isFull ? 'Casquinha pronta' : state.isPouring ? 'Servindo…' : 'Segure para servir';
     }
   }
 
@@ -183,14 +183,14 @@ function updateUI() {
     sprinklesBtn.classList.toggle('selected', state.sprinkles);
     sprinklesBtn.setAttribute('aria-pressed', state.sprinkles ? 'true' : 'false');
     const span = sprinklesBtn.querySelector('span');
-    if (span) span.textContent = state.sprinkles ? 'Sprinkles ✓' : 'Adicionar confeitos';
+    if (span) span.textContent = state.sprinkles ? 'Confeitos ✓' : 'Adicionar confeitos';
   }
   if (pearlsBtn) {
     pearlsBtn.disabled = !hasCone;
     pearlsBtn.classList.toggle('selected', state.pearls);
     pearlsBtn.setAttribute('aria-pressed', state.pearls ? 'true' : 'false');
     const span = pearlsBtn.querySelector('span');
-    if (span) span.textContent = state.pearls ? 'Pearls ✓' : 'Adicionar pérolas';
+    if (span) span.textContent = state.pearls ? 'Pérolas ✓' : 'Adicionar pérolas';
   }
 
   // Cone drop CSS variable so taller cones have room below the nozzle
@@ -692,7 +692,7 @@ function selectFlavour(key) {
   if (!FLAVOURS[key]) return;
   state.selectedFlavour = key;
   updateUI();
-  announce(`${FLAVOURS[key].label} selected. Ready to pour.`);
+  announce(`Sabor ${FLAVOURS[key].label} selecionado. Pronto para servir.`);
 }
 
 for (const [key, btn] of Object.entries(flavourBtns)) {
@@ -729,7 +729,7 @@ function stopPouring() {
   }
   updateUI();
   const turns = getDisplayTurns();
-  announce(`Poured ${turns} ${turns === 1 ? 'volta' : 'voltas'}.`);
+  announce(`Você serviu ${turns} ${turns === 1 ? 'volta' : 'voltas'}.`);
 }
 
 if (leverBtn) {
