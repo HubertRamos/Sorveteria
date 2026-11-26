@@ -360,7 +360,7 @@ a:focus-visible, button:focus-visible {
   }
 
   .hero-copy::before {
-    content: "A LITTLE SOFT SERVE";
+    content: "UM SORVETE FEITO POR VOCÊ";
     display: inline-flex;
     align-items: center;
     gap: 10px;
