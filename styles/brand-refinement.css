@@ -339,3 +339,82 @@ a:focus-visible, button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+
+/* Hero refinement — desktop editorial pass */
+@media (min-width: 1001px) {
+  .machine-stage:after {
+    background: linear-gradient(90deg,
+      rgba(25, 49, 42, .99) 0%,
+      rgba(25, 49, 42, .94) 25%,
+      rgba(25, 49, 42, .72) 36%,
+      rgba(25, 49, 42, .22) 48%,
+      transparent 59%,
+      rgba(25, 49, 42, .12) 100%);
+  }
+
+  .hero-copy {
+    top: 14.5%;
+    left: 6.2%;
+    width: min(29%, 440px);
+  }
+
+  .hero-copy::before {
+    content: "A LITTLE SOFT SERVE";
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #e8c98e;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .2em;
+  }
+
+  .hero-copy::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 2px;
+    margin-top: 27px;
+    background: #e8c98e;
+    opacity: .9;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 24px;
+    color: #fff9ec;
+    font-size: clamp(104px, 9.3vw, 150px);
+    line-height: .76;
+    letter-spacing: -.11em;
+    text-shadow: 0 5px 24px rgba(0, 0, 0, .12);
+  }
+
+  .hero-copy p:not(.shop-line) {
+    max-width: 330px;
+    margin-top: 0;
+    color: rgba(255, 249, 236, .92);
+    font-size: clamp(16px, 1.2vw, 18px);
+    line-height: 1.65;
+  }
+
+  .hero-copy .shop-line {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 25px !important;
+    padding-top: 13px;
+    border-top: 1px solid rgba(232, 201, 142, .42);
+    color: #e8c98e;
+    font-size: 10px !important;
+    font-weight: 800;
+    letter-spacing: .16em;
+    line-height: 1.5;
+  }
+
+  .hero-arrow {
+    width: 112px;
+    margin-top: 19px;
+    color: #e8c98e;
+    opacity: .9;
+  }
+}
