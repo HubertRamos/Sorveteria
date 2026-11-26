@@ -5,19 +5,19 @@ const REGULAR_TURNS = 3;
 
 const FLAVOURS = {
   vanilla: {
-    label: 'Vanilla',
+    label: 'Baunilha',
     color: new THREE.Color('#f4e8cd'),
     emissive: new THREE.Color('#2a2114'),
     flatFill: '#f5ebd3',
   },
   strawberry: {
-    label: 'Strawberry',
+    label: 'Morango',
     color: new THREE.Color('#eba0b0'),
     emissive: new THREE.Color('#301219'),
     flatFill: '#eb9cab',
   },
   pistachio: {
-    label: 'Pistachio',
+    label: 'Pistache',
     color: new THREE.Color('#b9d79b'),
     emissive: new THREE.Color('#192813'),
     flatFill: '#b9d89c',
@@ -173,7 +173,7 @@ function updateUI() {
     leverBtn.disabled = isFull;
     const span = leverBtn.querySelector('span');
     if (span) {
-      span.textContent = isFull ? 'Cone full' : state.isPouring ? 'Swirling…' : 'Hold to swirl';
+      span.textContent = isFull ? 'Cone full' : state.isPouring ? 'Swirling…' : 'Segure para servir';
     }
   }
 
@@ -183,14 +183,14 @@ function updateUI() {
     sprinklesBtn.classList.toggle('selected', state.sprinkles);
     sprinklesBtn.setAttribute('aria-pressed', state.sprinkles ? 'true' : 'false');
     const span = sprinklesBtn.querySelector('span');
-    if (span) span.textContent = state.sprinkles ? 'Sprinkles ✓' : 'Add sprinkles';
+    if (span) span.textContent = state.sprinkles ? 'Sprinkles ✓' : 'Adicionar confeitos';
   }
   if (pearlsBtn) {
     pearlsBtn.disabled = !hasCone;
     pearlsBtn.classList.toggle('selected', state.pearls);
     pearlsBtn.setAttribute('aria-pressed', state.pearls ? 'true' : 'false');
     const span = pearlsBtn.querySelector('span');
-    if (span) span.textContent = state.pearls ? 'Pearls ✓' : 'Add pearls';
+    if (span) span.textContent = state.pearls ? 'Pearls ✓' : 'Adicionar pérolas';
   }
 
   // Cone drop CSS variable so taller cones have room below the nozzle
@@ -206,7 +206,7 @@ function updateUI() {
     const list = [];
     if (state.sprinkles) list.push('Sprinkles');
     if (state.pearls) list.push('Pearls');
-    receiptToppingsVal.textContent = list.length ? list.join(', ') : 'None yet';
+    receiptToppingsVal.textContent = list.length ? list.join(', ') : 'Nenhuma';
   }
   if (sendBtn && !state.copyResetTimer) {
     sendBtn.disabled = !hasCone;
@@ -214,7 +214,7 @@ function updateUI() {
 
   // Bottom bar
   if (bottomTurnsEl) {
-    bottomTurnsEl.textContent = `${turns} of ${MAX_TURNS} turns`;
+    bottomTurnsEl.textContent = `${turns} de ${MAX_TURNS} voltas`;
   }
   if (regularConeBtn) {
     regularConeBtn.disabled = state.pourProgress >= REGULAR_TURNS && !state.autoTargetTurns;
@@ -643,10 +643,10 @@ function stepAnimation(now) {
       if (state.autoTargetTurns !== null) {
         state.autoTargetTurns = null;
         state.isPouring = false;
-        announce(`Regular ${FLAVOURS[state.selectedFlavour].label} cone ready.`);
+        announce(`Casquinha tradicional de ${FLAVOURS[state.selectedFlavour].label} pronta.`);
       } else {
         state.isPouring = false;
-        announce('Cone full! Add toppings or send it to a friend.');
+        announce('Casquinha pronta! Adicione coberturas ou compartilhe com alguém.');
       }
       updateUI();
     }
@@ -729,7 +729,7 @@ function stopPouring() {
   }
   updateUI();
   const turns = getDisplayTurns();
-  announce(`Poured ${turns} ${turns === 1 ? 'turn' : 'turns'}.`);
+  announce(`Poured ${turns} ${turns === 1 ? 'volta' : 'voltas'}.`);
 }
 
 if (leverBtn) {
@@ -761,7 +761,7 @@ sprinklesBtn?.addEventListener('click', () => {
   state.sprinkles = !state.sprinkles;
   if (state.sprinkles) state.toppingDropProgress.sprinkles = 0;
   updateUI();
-  announce(state.sprinkles ? 'Rainbow sprinkles added.' : 'Rainbow sprinkles removed.');
+  announce(state.sprinkles ? 'Confeitos coloridos adicionados.' : 'Confeitos coloridos removidos.');
 });
 
 pearlsBtn?.addEventListener('click', () => {
@@ -769,7 +769,7 @@ pearlsBtn?.addEventListener('click', () => {
   state.pearls = !state.pearls;
   if (state.pearls) state.toppingDropProgress.pearls = 0;
   updateUI();
-  announce(state.pearls ? 'Chocolate pearls added.' : 'Chocolate pearls removed.');
+  announce(state.pearls ? 'Pérolas de chocolate adicionadas.' : 'Pérolas de chocolate removidas.');
 });
 
 regularConeBtn?.addEventListener('click', () => {
@@ -791,7 +791,7 @@ resetBtn?.addEventListener('click', () => {
     window.history.replaceState({}, '', cleanUrl);
   }
   updateUI();
-  announce('Cone cleared. Ready to pour a new cone.');
+  announce('Casquinha limpa. Tudo pronto para montar outra.');
 });
 
 sendBtn?.addEventListener('click', async () => {
@@ -826,11 +826,11 @@ sendBtn?.addEventListener('click', async () => {
   }
 
   if (state.copyResetTimer) clearTimeout(state.copyResetTimer);
-  sendBtn.innerHTML = `${CHECK_ICON_SVG} ${copied ? 'Link copied!' : 'Ready in URL'}`;
-  announce('Cone link copied to clipboard.');
+  sendBtn.innerHTML = `${CHECK_ICON_SVG} ${copied ? 'Link copiado!' : 'Link disponível na URL'}`;
+  announce('Link do sorvete copiado.');
   state.copyResetTimer = setTimeout(() => {
     state.copyResetTimer = null;
-    sendBtn.innerHTML = `${SHARE_ICON_SVG}Send this cone`;
+    sendBtn.innerHTML = `${SHARE_ICON_SVG}Compartilhar sorvete`;
     updateUI();
   }, 2400);
 });
