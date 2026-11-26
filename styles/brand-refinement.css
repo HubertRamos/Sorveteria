@@ -67,11 +67,12 @@ a:focus-visible, button:focus-visible {
 
 /* Hero and machine: preserve all original photo-relative control positions */
 .machine-stage {
-  min-height: 620px;
+  min-height: 0;
+  aspect-ratio: 1672 / 941;
   background: var(--tile);
   isolation: isolate;
 }
-.machine-photo { object-fit: cover; object-position: center; }
+.machine-photo { object-fit: fill; }
 .machine-stage:after {
   z-index: 1;
   background: linear-gradient(90deg,
@@ -262,15 +263,6 @@ a:focus-visible, button:focus-visible {
   font-size: 11px;
 }
 .footer-bottom span:first-child { color: var(--foreground); font-weight: 700; }
-
-/* Gentle entrance for content, without changing machine behavior */
-@media (prefers-reduced-motion: no-preference) {
-  .section, .topping-text { animation: ts-rise-in .7s both; }
-  @keyframes ts-rise-in {
-    from { opacity: .65; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-}
 
 /* Tablet */
 @media (max-width: 1000px) and (min-width: 701px) {
